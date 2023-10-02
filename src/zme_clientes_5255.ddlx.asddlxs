@@ -1,0 +1,42 @@
+@Metadata.layer: #CORE@UI.headerInfo: { 
+    typeName: 'Client',
+    typeNamePlural: 'Books',
+    imageUrl: 'ClienteUrl',
+    title: { 
+        type: #STANDARD,
+        value: 'FullName' },
+    description: { type: #STANDARD, value: 'IdCliente' }
+ }
+
+annotate entity ZB_CLIENTES_5255
+    with 
+{
+    @UI: { 
+        facet: [
+            { id: 'CustomerDetails',
+              label: 'Client',
+              type: #COLLECTION, 
+              position: 10},
+              
+            { id: 'Client',
+              parentId: 'CustomerDetails',
+              label: 'Details',
+              type: #FIELDGROUP_REFERENCE,
+              targetQualifier: 'CustomerDetails',
+              position: 10 }
+            ],
+         lineItem: [{ position: 10,
+                      importance: #HIGH }],
+         fieldGroup: [{ qualifier: 'CustomerDetails', position: 10 }]            
+    }
+    IdCliente;
+    @UI: { lineItem: [{ position: 20, importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'CustomerDetails', position: 20 }] }
+    TipoAcceso;
+    @UI: { lineItem: [{ position: 20,
+                        importance: #HIGH }],
+           fieldGroup: [{ qualifier: 'CustomerDetails',
+                          position: 30 }] }
+    Email;
+    
+}
