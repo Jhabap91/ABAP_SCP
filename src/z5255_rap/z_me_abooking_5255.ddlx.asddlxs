@@ -1,0 +1,76 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI: {
+ headerInfo: {
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+    title: {
+        type: #STANDARD,
+        label: 'Booking',
+        value: 'BookingID'
+
+}
+}
+}
+annotate view Z_C_ABOOKING_5255 with
+{
+  @UI.facet: [{ id: 'Booking',
+              purpose: #STANDARD,
+              type: #IDENTIFICATION_REFERENCE,
+              label: 'Travel',
+              position: 10 }]
+  @Search.defaultSearchElement: true
+  TravelId;
+  @UI: { lineItem: [{ qualifier: 'BookingId',
+                      position: 20,
+                      label: 'BookingId',
+                      importance: #HIGH }] }
+  @Search.defaultSearchElement: true
+  BookingId;
+  @UI: { lineItem: [{ qualifier: 'BookingDate',
+                      position: 30,
+                      label: 'BookingDate',
+                      importance: #HIGH }],
+         identification: [{ position: 30 }] }
+  BookingDate;
+  @UI: { lineItem: [{ qualifier: 'CustomerId',
+                      position: 40,
+                      label: 'CustomerId',
+                      importance: #HIGH }],
+         identification: [{ position: 40 }],
+         selectionField: [{ position: 10 }] }
+  @Search.defaultSearchElement: true
+  CustomerId;
+  @UI: { lineItem: [{ qualifier: 'CarrierId',
+                      position: 50,
+                      label: 'CarrierId',
+                      importance: #HIGH }],
+         identification: [{ position: 50 }] }
+  CarrierId;
+  @UI: { lineItem: [{ qualifier: 'ConnectionId',
+                      label: 'ConnectionId',
+                      position: 60,
+                      importance: #HIGH }],
+         identification: [{ position: 60 }] }
+  ConnectionId;
+  @UI: { lineItem: [{ qualifier: 'FlightDate',
+                      position: 70,
+                      label: 'FlightDate',
+                      importance: #HIGH }]
+          }
+  FlightDate;
+  @UI: { lineItem: [{ qualifier: 'FlightPrice',
+                      position: 80,
+                      label: 'FlightPrice',
+                      importance: #HIGH }],
+         identification: [{ position: 80 }] }
+  FlightPrice;
+  @UI: { lineItem: [{ qualifier: 'BookingStatus',
+                      position: 90,
+                      label: 'BookingStatus',
+                      importance: #HIGH }],
+         identification: [{ position: 90, label: 'Status [N(New)| X(Canceled)| B(Booked)]' }] }
+  BookingStatus;
+  @UI.hidden: true
+  LastChangedAt;
+}

@@ -13,7 +13,7 @@ define view entity Z_C_ABOOKING_5255
       FlightDate,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       FlightPrice,
-      CurrencyCode,
+      CurrencyCode as CurrencyCode,
       BookingStatus,
       LastChangedAt,
       /* Associations */

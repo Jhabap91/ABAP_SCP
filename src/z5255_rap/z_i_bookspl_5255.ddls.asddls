@@ -22,7 +22,7 @@ define view entity Z_I_BOOKSPL_5255
       supplement_id         as SupplementId,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       price                 as Price,
-      currency_code         as CurrencyCode,
+      BookingSupplement.currency_code as CurrencyCode,
       last_changed_at       as LastChangedAt,
       _Booking,
       _Travel,

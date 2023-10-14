@@ -1,0 +1,101 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI: {
+ headerInfo: {
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+    title: {
+        type: #STANDARD,
+        label: 'Booking',
+        value: 'BookingID'
+
+}
+}
+}
+annotate view Z_C_BOOKING_5255 with
+{
+  @UI.facet: [{ id: 'Booking',
+             purpose: #STANDARD,
+             type: #IDENTIFICATION_REFERENCE,
+             label: 'Travel',
+             position: 10 },
+             { id: 'BookingSupplement',
+             purpose: #STANDARD,
+             type: #LINEITEM_REFERENCE,
+             label: 'Booking Supplement',
+             position: 20,
+             targetElement: '_BookingSupplement' }]
+  @UI: { lineItem: [{ position: 10,
+                      importance: #LOW }] }
+  @Search.defaultSearchElement: true
+  TravelId;
+  @UI: { lineItem: [{ qualifier: 'BookingId',
+                      position: 20,
+                      label: 'Travel',
+                      importance: #LOW }]
+       }
+  @Search.defaultSearchElement: true
+  BookingId;
+  @UI: { lineItem: [{ qualifier: 'BookingDate',
+                      position: 30,
+                      label: 'BookingDate',
+                      importance: #LOW }],
+         identification: [{ position: 30 }] }
+  BookingDate;
+  @UI: { lineItem: [{ qualifier: 'CustomerId',
+                      position: 40,
+                      label: 'CustomerId',
+                      importance: #LOW }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Customer', element: 'CustomerID' } }]
+  @Search.defaultSearchElement: true
+  CustomerId;
+  @UI: { lineItem: [{ qualifier: 'CarrierId',
+                      position: 50,
+                      label: 'CarrierId',
+                      importance: #LOW }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Carrier', element: 'AirlineID' } }]
+  CarrierId;
+  @UI: { lineItem: [{ qualifier: 'ConnectionId',
+                      position: 60,
+                      label: 'ConnectionId',
+                      importance: #LOW }],
+         identification: [{ position: 60 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Flight', element: 'ConnectionID' },
+  additionalBinding: [{ localElement: 'FlightDate', element: 'FlightDate'},
+                      { localElement: 'CarrierId', element: 'AirlineID' },
+                      { localElement: 'FlightPrice', element: 'Price' },
+                      { localElement: 'CurrencyCode', element: 'CurrencyCode' } ] } ]
+  ConnectionId;
+  @UI: { lineItem: [{ qualifier: 'FlighDate',
+                      position: 70,
+                      label: 'FlightDate',
+                      importance: #LOW }],
+          identification: [{ position: 70 }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Flight', element: 'FlightDate' },
+  additionalBinding: [{ localElement: 'FlightDate', element: 'FlightDate'},
+                    { localElement: 'CarrierId', element: 'AirlineID' },
+                    { localElement: 'FlightPrice', element: 'Price' },
+                    { localElement: 'CurrencyCode', element: 'CurrencyCode' } ] } ]
+  FlightDate;
+  @UI: { lineItem: [{ qualifier: 'Flightprice',
+                      position: 80,
+                      label: 'Flightprice',
+                      importance: #LOW }],
+         identification: [{ position: 80 }] }
+  FlightPrice;
+  @UI: { lineItem: [{ qualifier: 'CurrencyCode',
+                      position: 90,
+                      label: 'CurrencyCode',
+                      importance: #LOW }] }
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'CurrencyCode' } } ]
+  CurrencyCode;
+  @UI: { lineItem: [{ qualifier: 'BookingStatus',
+                      position: 100,
+                      label: 'BookingStatus',
+                      importance: #LOW }],
+         identification: [{ position: 100, label: 'Status [N(New)| X(Canceled)| B(Booked)' }] }
+  @Search.defaultSearchElement: true
+  BookingStatus;
+  @UI.hidden: true
+  LastChangedAt;
+}

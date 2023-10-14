@@ -4,8 +4,8 @@
 define root view entity Z_C_TRAVEL_5255
   as projection on Z_I_TRAVEL_5255
 {
-  key TravelId,
-      AgencyId,
+  key TravelId as TravelID,
+      AgencyId as AgencyID,
       CustomerId,
       BeginDate,
       EndDate,

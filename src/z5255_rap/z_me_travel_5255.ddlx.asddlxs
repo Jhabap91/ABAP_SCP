@@ -16,15 +16,74 @@ annotate view Z_C_TRAVEL_5255 with
   @UI.facet: [{ id: 'Travel', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Travel', position: 10 },
               { id: 'Booking', purpose: #STANDARD, type: #LINEITEM_REFERENCE, label: 'Booking', position: 20, targetElement: '_Booking' }]
   @UI: {
-  lineItem: [{
-      qualifier: '',
+  lineItem: [{ type: #STANDARD,
+      qualifier: 'TravelID',
       position: 10,
-      exclude: true,
-      hidden: true,
-      importance: #HIGH }],
+      label: 'TravelID',
+      importance: #LOW }],
 
-  identification: [{ position: 10, label: 'Travel ID [1,...,999999999]' }]}
+  identification: [{ qualifier: 'TravelId', position: 10, label: 'Travel ID [1,...,999999999]', importance: #HIGH }] }
+
   @Search.defaultSearchElement: true
-  TravelId;
+  TravelID;
+  @UI:{ lineItem: [{ qualifier: 'AgencyID',
+                     position: 20,
+                     label: 'AgencyID',
+                     importance: #HIGH }],
+        identification: [{ position: 20, importance: #HIGH }],
+        selectionField: [{ position: 20 }],
+        dataFieldDefault: [{type: #STANDARD}] }
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Agency', element: 'AgencyID' } }]
+  AgencyID;
+  @UI:{ lineItem: [{ qualifier: 'Customer',
+                     position: 30,
+                     label: 'Customer',
+                     importance: #HIGH }],
+        identification: [{ position: 30 }],
+        selectionField: [{ position: 30 }]}
+  @Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Customer', element: 'CustomerId' } }]
+  @Search.defaultSearchElement: true
+  CustomerId;
+  @UI:{ lineItem: [{ qualifier: 'BeginDate',
+                     position: 40,
+                     label: 'BeginDate',
+                     importance: #MEDIUM }],
+        identification: [{ position: 40 }] }
+  BeginDate;
+  @UI:{ lineItem: [{ qualifier: 'EndDate',
+                     position: 41,
+                     label: 'EndDAte',
+                     importance: #MEDIUM }],
+        identification: [{ position: 41 }] }
+  EndDate;
+  @UI:{ lineItem: [{ qualifier: 'BookingFee',
+                     position: 42,
+                     label: 'BookingFee',
+                     importance: #MEDIUM }],
+        identification: [{ position: 42 }] }
+  BookingFee;
+  @UI:{ lineItem: [{ qualifier: 'TotalPrice',
+                     position: 43,
+                     label: 'TotalPrice',
+                     importance: #MEDIUM }],
+        identification: [{ position: 43, label: 'Total Price' }] }
+  TotalPrice;
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency' } }]
+  CurrencyCode;
+  @UI:{ lineItem: [{ qualifier: 'Description',
+                     position: 46,
+                     label: 'Description',
+                     importance: #MEDIUM }],
+        identification: [{ position: 46 }] }
+  Description;
+  @UI: {  
+  lineItem: [{ position: 50, importance: #HIGH }, 
+             { type: #FOR_ACTION, dataAction: 'CreateTravelByTemplate', label: 'Create Travel by state' }],
+  identification: [{ position: 45, label: 'Status [O(Open)|A(Accepted)|X(Canceled)]' }]
+  
+  }
+  OverallStatus;
+  @UI.hidden: true
+  LastChangedAt;
 
 }

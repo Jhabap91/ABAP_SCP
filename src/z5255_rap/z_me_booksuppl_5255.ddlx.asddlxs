@@ -1,0 +1,60 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI: {
+ headerInfo: {
+    typeName: 'Booking Supplement',
+    typeNamePlural: 'Booking Supplements',
+    title: {
+        type: #STANDARD,
+        label: 'Booking Supplement',
+        value: 'BookingSupplementID'
+
+}
+}
+}
+annotate view Z_C_BOOKSUPPLEMENT_5255 with
+{
+ @UI.facet: [{ id: 'BookingSupplement', 
+               purpose: #STANDARD, 
+               type: #IDENTIFICATION_REFERENCE, 
+               label: 'BookingSupplement', 
+               position: 10 } ]
+  @Search.defaultSearchElement: true
+TravelId;
+@UI: { lineItem: [{ qualifier: 'BookingId',
+                    position: 10,
+                    label: 'BookingId',
+                    importance: #HIGH }] }
+ @Search.defaultSearchElement: true
+BookingId;
+@UI: { lineItem: [{ qualifier: 'BookingSupplementId',
+                    position: 10,
+                    label: 'BookingSupplementId',
+                    importance: #HIGH }],
+       identification: [{ position: 10  }] }
+BookingSupplementId;
+@UI: { lineItem: [{ qualifier: 'SupplementId',
+                    position: 20,
+                    label: 'SupplementId',
+                    importance: #HIGH }],
+       identification: [{ position: 20 }] }
+@Consumption.valueHelpDefinition: [{ entity: { name: '/DMO/I_Supplement', element: 'SupplementID' },
+                                     additionalBinding: [{ localElement: 'Price', element: 'Price' },
+                                                         { localElement: 'CurrencyCode', element: 'CurrencyCode' } ] }]
+    
+SupplementId;
+@UI: { lineItem: [{ qualifier: 'Price',
+                    position: 30,
+                    label: 'Price',
+                    importance: #MEDIUM }],
+       identification: [{ position: 30 }] }
+Price;
+@UI: { lineItem: [{ qualifier: 'CurrencyCode',
+                    position: 40,
+                    label: 'CurrencyCode',
+                    importance: #MEDIUM }] }
+@Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency' }}]
+CurrencyCode;
+@UI.hidden: true  
+LastChangedAt;
+}
