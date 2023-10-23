@@ -1,0 +1,82 @@
+managed implementation in class zbp_i_travel_5255 unique;
+strict ( 2 );
+
+define behavior for Z_I_TRAVEL_5255 alias Travel//alias <alias_name>
+persistent table ztb_travel_5255
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  // administrative fields: red only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+  // mandatory fields that are required to create a travel
+  field ( mandatory ) AgencyId, OverallStatus, BookingFee, CurrencyCode;
+  // dynamic field control
+  field ( features : instance ) TravelId;
+
+  //  field (numbering : managed) TravelId;
+  create;
+  update;
+  delete;
+
+  // Validation
+  validation validateCustomer on save { field CustomerId; }
+  validation validateDates on save { field BeginDate, EndDate; }
+  validation validateStatus on save { field OverallStatus; }
+
+  // actions
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+  action createTravelByTemplate result [1] $self;
+
+  association _Booking { create; }
+
+  // mapping
+  mapping
+       for ztb_travel_5255 corresponding;
+    }
+
+  define behavior for Z_I_BOOKING_5255 alias Booking
+  implementation in class zbp_i_booking_5255 unique
+  persistent table ztb_booking_5255
+  lock dependent by _Travel
+  authorization dependent by _Travel
+  etag master LastChangedAt
+  {
+    // Static Fields Control
+    field ( readonly ) TravelId;
+    field ( mandatory ) CarrierId, ConnectionId, FlightDate, BookingStatus;
+    update;
+    delete;
+    // Validations
+    validation validationStatus on save { field BookingStatus; }
+
+    // determination
+    determination calculateTotalFlightPrice on modify { field FlightPrice, CurrencyCode; }
+
+    //  field ( readonly ) TravelId;
+    association _Travel;
+    association _BookingSupplement { create; }
+    // mapping
+    mapping
+         for ztb_booking_5255 corresponding;
+      }
+
+    define behavior for Z_I_BOOKSPL_5255 alias Supplement
+    implementation in class zbp_i_bookspl_5255 unique
+    //persistent table ztb_bookspl_5255
+    with unmanaged save
+    lock dependent by _Travel
+    authorization dependent by _Travel
+    etag master LastChangedAt
+    {
+      update;
+      delete;
+      field ( readonly ) TravelId, BookingId;
+
+      determination calculateTotalSupplPrice on modify { field Price, CurrencyCode; }
+
+      association _Travel;
+      association _Booking;
+    }

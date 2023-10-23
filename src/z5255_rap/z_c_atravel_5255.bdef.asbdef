@@ -1,0 +1,23 @@
+projection;
+strict ( 2 );
+
+define behavior for Z_C_ATRAVEL_5255 alias TravelApproval
+{
+  //  use create;
+  //  use update;
+  //  use delete;
+
+  use action acceptTravel;
+  use action rejectTravel;
+  use action createTravelByTemplate;
+
+  //  use association _Booking { create; }
+}
+
+//define behavior for Z_C_ABOOKING_5255 //alias <alias_name>
+//{
+//  use update;
+//  use delete;
+//
+//  use association _Travel;
+//}
