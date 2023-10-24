@@ -11,6 +11,7 @@ define view entity Z_C_BOOKSUPPLEMENT_5255
       _SupplementText.Description as SupplementDesc : localized,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       Price,
+      @Semantics.currencyCode: true
       CurrencyCode as CurrencyCode,
       LastChangedAt,
       /* Associations */

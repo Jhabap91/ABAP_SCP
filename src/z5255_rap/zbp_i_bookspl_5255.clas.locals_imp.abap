@@ -1,5 +1,4 @@
-CLASS lhc_supplement DEFINITION INHERITING FROM cl_abap_behavior_handler.
-
+CLASS lhc_Supplement DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
     METHODS calculateTotalSupplPrice FOR DETERMINE ON MODIFY
@@ -7,13 +6,9 @@ CLASS lhc_supplement DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
 ENDCLASS.
 
-CLASS lhc_supplement IMPLEMENTATION.
+CLASS lhc_Supplement IMPLEMENTATION.
 
   METHOD calculateTotalSupplPrice.
   ENDMETHOD.
 
 ENDCLASS.
-
-*"* use this source file for the definition and implementation of
-*"* local helper classes, interface definitions and type
-*"* declarations
