@@ -1,5 +1,5 @@
 @EndUserText.label: 'CDS Consumption - Booking'
-@AccessControl.authorizationCheck: #CHECK
+@AccessControl.authorizationCheck: #NOT_REQUIRED
 @Metadata.allowExtensions: true
 define view entity Z_C_BOOKING_5255
   as projection on Z_I_BOOKING_5255
@@ -7,8 +7,10 @@ define view entity Z_C_BOOKING_5255
   key TravelId,
   key BookingId,
       BookingDate,
-      CustomerId,
+      CustomerID,
+      @ObjectModel.text.element: [ 'CarrierName' ]
       CarrierId,
+      _Carrier.Name as CarrierName,
       ConnectionId,
       FlightDate,
       @Semantics.amount.currencyCode: 'CurrencyCode'
